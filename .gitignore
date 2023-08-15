@@ -1,0 +1,5 @@
+logs/discord.log*
+venv
+.env
+__pycache__
+!logs/.gitkeep 
