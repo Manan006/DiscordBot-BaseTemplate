@@ -1,14 +1,20 @@
 from typing import Optional
 import discord
 from discord import app_commands
-from logs import log_config
 from bot import bot
 from env import TOKEN
 
 
 @bot.event
 async def on_ready() -> None:
-    print(f'Logged in as {bot.user} (ID: {bot.user.id})')
+    print(
+        f'Logged in as {bot.user} (ID: {bot.user.id})\nInitializing the command modules')
+
+    #####################
+    # Insert all your cogs in here
+    # await bot.add_cog()
+    #####################
+
     print('------')
 
 
@@ -72,8 +78,7 @@ async def report_message(interaction: discord.Interaction, message: discord.Mess
     )
 
     # Handle report by sending it into a log channel
-    log_channel = interaction.guild.get_channel(
-        0)  # replace with your channel id
+    log_channel = interaction.channel  # replace with your channel id
 
     embed = discord.Embed(title='Reported Message')
     if message.content:
@@ -90,5 +95,4 @@ async def report_message(interaction: discord.Interaction, message: discord.Mess
     await log_channel.send(embed=embed, view=url_view)
 
 
-bot.run(token=TOKEN, log_handler=log_config["handler"],
-        log_formatter=log_config["formatter"], log_level=log_config["level"])
+bot.run(token=TOKEN)

@@ -5,7 +5,7 @@ from typing import TypedDict
 
 Log_dict = TypedDict("Log_dict",
                      {"handler": logging.handlers.RotatingFileHandler,
-                         "formatter": logging.Formatter, "level": logging.NOTSET})
+                      "formatter": logging.Formatter, "level": logging.WARNING})
 
 
 def generate_log_config() -> Log_dict:
@@ -25,11 +25,6 @@ def generate_log_config() -> Log_dict:
     else:
         level = logging.WARNING
     return Log_dict(handler=handler, formatter=formatter, level=level)
-
-    # return {"handler": handler,
-    #         "formatter": formatter,
-    #         "level": level
-    #         }
 
 
 log_config = generate_log_config()
